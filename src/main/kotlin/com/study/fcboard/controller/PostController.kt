@@ -5,6 +5,8 @@ import com.study.fcboard.controller.dto.PostDetailResponse
 import com.study.fcboard.controller.dto.PostSearchRequest
 import com.study.fcboard.controller.dto.PostSummaryResponse
 import com.study.fcboard.controller.dto.PostUpdateRequest
+import com.study.fcboard.controller.dto.toDTO
+import com.study.fcboard.service.PostService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -20,31 +22,29 @@ import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/posts")
-class PostController {
+class PostController(
+    private val postService: PostService,
+) {
 
     @PostMapping
     fun createPost(
         @RequestBody request: PostCreateRequest,
-    ): Long {
-        return 1L
-    }
+    ): Long =
+        postService.createPost(request.toDTO())
 
     @PutMapping("/{id}")
     fun updatePost(
         @PathVariable id: Long,
         @RequestBody request: PostUpdateRequest,
-    ): Long {
-        return id
-    }
+    ): Long =
+        postService.updatePost(id, request.toDTO())
 
     @DeleteMapping("/{id}")
     fun deletePost(
         @PathVariable id: Long,
         @RequestParam createdBy: String,
-    ): Long {
-        println(createdBy)
-        return id
-    }
+    ): Long =
+        postService.deletePost(id, createdBy)
 
     @GetMapping("/{id}")
     fun getPost(
