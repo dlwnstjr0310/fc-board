@@ -2,9 +2,6 @@ name: fastcampus board
 
 env:
   AWS_REGION: ap-northeast-2
-  DB_URL: ${{ secrets.DB_URL }}
-  DB_USERNAME: ${{ secrets.DB_USERNAME }}
-  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
 on:
   push:
@@ -26,12 +23,15 @@ jobs:
         java-version: '17'
         distribution: 'zulu'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
     - name: Build with Gradle
-      run: ./gradlew clean build -x test
-
+      run: |
+        chmod +x gradlew
+        ./gradlew clean build -x test
+      env:
+        DB_URL: ${{ secrets.DB_URL }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+    
     - name: Get current time
       uses: 1466587594/get-current-time@v2
       id: current-time
