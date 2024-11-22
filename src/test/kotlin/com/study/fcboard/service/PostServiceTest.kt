@@ -90,7 +90,6 @@ class PostServiceTest(
                     )
                 }
             }
-
         }
 
         When("작성자가 동일하지 않으면") {
@@ -107,7 +106,6 @@ class PostServiceTest(
                     )
                 }
             }
-
         }
     }
 
@@ -129,9 +127,7 @@ class PostServiceTest(
 
                 postId shouldBe saved.id
                 postRepository.findByIdOrNull(postId) shouldBe null
-
             }
-
         }
 
         When("작성자가 동일하지 않으면") {
@@ -149,10 +145,7 @@ class PostServiceTest(
                 shouldThrow<PostNotDeletableException> {
                     postService.deletePost(saved2.id, "junstone@")
                 }
-
             }
-
         }
-
     }
 })
