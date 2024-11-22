@@ -28,6 +28,10 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew clean build -x test
+      env:
+        database.url: ${{ secrets.DB_URL }}
+        database.username: ${{ secrets.DB_USERNAME }}
+        database.password: ${{ secrets.DB_PASSWORD }}
 
     - name: Get current time
       uses: 1466587594/get-current-time@v2
