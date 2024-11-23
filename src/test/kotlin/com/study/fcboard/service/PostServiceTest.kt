@@ -7,6 +7,7 @@ import com.study.fcboard.exception.PostNotFoundException
 import com.study.fcboard.exception.PostNotUpdatableException
 import com.study.fcboard.repository.CommentRepository
 import com.study.fcboard.repository.PostRepository
+import com.study.fcboard.repository.TagRepository
 import com.study.fcboard.service.dto.request.PostCreateRequestDTO
 import com.study.fcboard.service.dto.request.PostSearchRequestDTO
 import com.study.fcboard.service.dto.request.PostUpdateRequestDTO
@@ -25,6 +26,7 @@ class PostServiceTest(
     private val postService: PostService,
     private val postRepository: PostRepository,
     private val commentRepository: CommentRepository,
+    private val tagRepository: TagRepository,
 ) : BehaviorSpec({
 
     beforeSpec {
@@ -45,6 +47,7 @@ class PostServiceTest(
     }
 
     given("게시글 생성 시 ") {
+
         When("게시글 인풋이 정상적으로 들어오면") {
 
             val postId = postService.createPost(
@@ -65,6 +68,26 @@ class PostServiceTest(
                 post?.createdBy shouldBe "junstone"
             }
         }
+
+        When("태그가 추가되면") {
+
+            val postId = postService.createPost(
+                PostCreateRequestDTO(
+                    title = "제목",
+                    content = "내용",
+                    createdBy = "junstone",
+                    tags = listOf("tag1", "tag2")
+                )
+            )
+
+            then("태그가 정상적으로 추가됨을 확인한다.") {
+                val tags = tagRepository.findByPostId(postId)
+
+                tags.size shouldBe 2
+                tags[0].name shouldBe "tag1"
+                tags[1].name shouldBe "tag2"
+            }
+        }
     }
 
     given("게시글 수정 시") {
@@ -73,7 +96,8 @@ class PostServiceTest(
             Post(
                 "title",
                 "content",
-                "junstone"
+                "junstone",
+                tags = listOf("tag1", "tag2")
             )
         )
 
@@ -128,6 +152,45 @@ class PostServiceTest(
                         )
                     )
                 }
+            }
+        }
+
+        When("태그가 수정되었을 때") {
+
+            val updatedId = postService.updatePost(
+                saved.id,
+                PostUpdateRequestDTO(
+                    "update title",
+                    "update content",
+                    "junstone",
+                    listOf("tag1", "tag2", "tag3")
+                )
+            )
+
+            then("정상적으로 수정됨을 확인한다.") {
+
+                val tags = tagRepository.findByPostId(updatedId)
+
+                tags.size shouldBe 3
+                tags[2].name shouldBe "tag3"
+            }
+
+            then("태그 순서가 변경되었을 때 정상적으로 변경됨을 확인한다.") {
+
+                postService.updatePost(
+                    saved.id,
+                    PostUpdateRequestDTO(
+                        "update title",
+                        "update content",
+                        "junstone",
+                        listOf("tag3", "tag2", "tag1")
+                    )
+                )
+
+                val tags = tagRepository.findByPostId(updatedId)
+
+                tags.size shouldBe 3
+                tags[2].name shouldBe "tag1"
             }
         }
     }

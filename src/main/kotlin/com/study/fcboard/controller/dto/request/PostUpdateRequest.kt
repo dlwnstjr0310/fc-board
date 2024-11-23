@@ -12,5 +12,6 @@ data class PostUpdateRequest(
 fun PostUpdateRequest.toDTO() = PostUpdateRequestDTO(
     title = title,
     content = content,
-    updatedBy = updatedBy
+    updatedBy = updatedBy,
+    tags = tags
 )

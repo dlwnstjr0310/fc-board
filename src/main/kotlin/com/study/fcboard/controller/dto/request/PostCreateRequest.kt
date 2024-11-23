@@ -12,5 +12,6 @@ data class PostCreateRequest(
 fun PostCreateRequest.toDTO() = PostCreateRequestDTO(
     title = title,
     content = content,
-    createdBy = createdBy
+    createdBy = createdBy,
+    tags = tags
 )
