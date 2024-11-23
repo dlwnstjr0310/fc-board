@@ -6,6 +6,7 @@ import com.study.fcboard.controller.dto.PostSearchRequest
 import com.study.fcboard.controller.dto.PostSummaryResponse
 import com.study.fcboard.controller.dto.PostUpdateRequest
 import com.study.fcboard.controller.dto.toDTO
+import com.study.fcboard.controller.dto.toResponse
 import com.study.fcboard.service.PostService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/posts")
@@ -49,21 +49,13 @@ class PostController(
     @GetMapping("/{id}")
     fun getPost(
         @PathVariable id: Long,
-    ): PostDetailResponse {
-        return PostDetailResponse(
-            1L,
-            "title",
-            "content",
-            "createdBy",
-            LocalDateTime.now().toString()
-        )
-    }
+    ): PostDetailResponse =
+        postService.getPost(id).toResponse()
 
     @GetMapping
     fun getPosts(
         pageable: Pageable,
         postSearchRequest: PostSearchRequest,
-    ): Page<PostSummaryResponse> {
-        return Page.empty()
-    }
+    ): Page<PostSummaryResponse> =
+        postService.findPageBy(pageable, postSearchRequest.toDTO()).toResponse()
 }
