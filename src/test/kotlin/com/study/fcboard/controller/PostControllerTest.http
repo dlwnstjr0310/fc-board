@@ -5,7 +5,11 @@ Content-Type: application/json
 {
     "title": "제목",
     "content": "내용",
-    "createdBy": "createdBy"
+    "createdBy": "createdBy",
+    "tags": [
+        "tag1",
+        "tag2"
+    ]
 }
 
 ### 게시글 수정
@@ -15,7 +19,11 @@ Content-Type: application/json
 {
     "title": "제목",
     "content": "내용",
-    "updatedBy": "updatedBy"
+    "updatedBy": "updatedBy",
+    "tags": [
+        "tag1",
+        "tag2"
+    ]
 }
 
 ### 게시글 삭제
@@ -25,4 +33,4 @@ DELETE /localhost:8080/posts/1?createdBy=junstone
 GET /localhost:8080/posts/1
 
 ### 게시글 목록 조회
-GET /localhost:8080/posts?page=0&size=10&title=title&createdBy=junstone
+GET /localhost:8080/posts?page=0&size=10&tag=kotlin
