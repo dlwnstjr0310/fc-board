@@ -5,9 +5,9 @@ import com.study.fcboard.exception.CommentNotFoundException
 import com.study.fcboard.exception.PostNotFoundException
 import com.study.fcboard.repository.CommentRepository
 import com.study.fcboard.repository.PostRepository
-import com.study.fcboard.service.dto.CommentCreateRequestDTO
-import com.study.fcboard.service.dto.CommentUpdateRequestDTO
-import com.study.fcboard.service.dto.toEntity
+import com.study.fcboard.service.dto.request.CommentCreateRequestDTO
+import com.study.fcboard.service.dto.request.CommentUpdateRequestDTO
+import com.study.fcboard.service.dto.request.toEntity
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

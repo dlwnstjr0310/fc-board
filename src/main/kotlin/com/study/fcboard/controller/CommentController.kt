@@ -1,8 +1,8 @@
 package com.study.fcboard.controller
 
-import com.study.fcboard.controller.dto.CommentCreateRequest
-import com.study.fcboard.controller.dto.CommentUpdateRequest
-import com.study.fcboard.controller.dto.toDTO
+import com.study.fcboard.controller.dto.request.CommentCreateRequest
+import com.study.fcboard.controller.dto.request.CommentUpdateRequest
+import com.study.fcboard.controller.dto.request.toDTO
 import com.study.fcboard.service.CommentService
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable

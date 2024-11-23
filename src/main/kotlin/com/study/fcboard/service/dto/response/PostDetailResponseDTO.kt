@@ -1,4 +1,4 @@
-package com.study.fcboard.service.dto
+package com.study.fcboard.service.dto.response
 
 import com.study.fcboard.domain.Post
 
@@ -8,6 +8,7 @@ data class PostDetailResponseDTO(
     val content: String,
     val createdBy: String,
     val createdAt: String,
+    val comments: List<CommentResponseDTO>,
 )
 
 fun Post.toDetailResponseDTO() = PostDetailResponseDTO(
@@ -15,5 +16,6 @@ fun Post.toDetailResponseDTO() = PostDetailResponseDTO(
     title = title,
     content = content,
     createdBy = createdBy,
-    createdAt = createdAt.toString()
+    createdAt = createdAt.toString(),
+    comments = comments.map { it.toResponseDTO() }
 )

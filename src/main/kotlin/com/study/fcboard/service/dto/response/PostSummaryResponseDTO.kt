@@ -1,4 +1,4 @@
-package com.study.fcboard.service.dto
+package com.study.fcboard.service.dto.response
 
 import com.study.fcboard.domain.Post
 import org.springframework.data.domain.Page

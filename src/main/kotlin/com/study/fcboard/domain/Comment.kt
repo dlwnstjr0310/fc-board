@@ -1,7 +1,7 @@
 package com.study.fcboard.domain
 
 import com.study.fcboard.exception.CommentNotUpdatableException
-import com.study.fcboard.service.dto.CommentUpdateRequestDTO
+import com.study.fcboard.service.dto.request.CommentUpdateRequestDTO
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue

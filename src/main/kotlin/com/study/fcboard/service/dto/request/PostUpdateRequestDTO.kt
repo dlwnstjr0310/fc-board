@@ -1,4 +1,4 @@
-package com.study.fcboard.service.dto
+package com.study.fcboard.service.dto.request
 
 data class PostUpdateRequestDTO(
     val title: String,

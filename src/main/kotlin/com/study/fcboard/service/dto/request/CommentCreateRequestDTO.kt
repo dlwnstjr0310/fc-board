@@ -1,4 +1,4 @@
-package com.study.fcboard.service.dto
+package com.study.fcboard.service.dto.request
 
 import com.study.fcboard.domain.Comment
 import com.study.fcboard.domain.Post

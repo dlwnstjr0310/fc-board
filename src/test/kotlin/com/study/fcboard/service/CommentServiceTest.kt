@@ -7,8 +7,8 @@ import com.study.fcboard.exception.CommentNotUpdatableException
 import com.study.fcboard.exception.PostNotFoundException
 import com.study.fcboard.repository.CommentRepository
 import com.study.fcboard.repository.PostRepository
-import com.study.fcboard.service.dto.CommentCreateRequestDTO
-import com.study.fcboard.service.dto.CommentUpdateRequestDTO
+import com.study.fcboard.service.dto.request.CommentCreateRequestDTO
+import com.study.fcboard.service.dto.request.CommentUpdateRequestDTO
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.comparables.shouldBeGreaterThan

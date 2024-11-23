@@ -1,7 +1,7 @@
 package com.study.fcboard.domain
 
 import com.study.fcboard.exception.PostNotUpdatableException
-import com.study.fcboard.service.dto.PostUpdateRequestDTO
+import com.study.fcboard.service.dto.request.PostUpdateRequestDTO
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

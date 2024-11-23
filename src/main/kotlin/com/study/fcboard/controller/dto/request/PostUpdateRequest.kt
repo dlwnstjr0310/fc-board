@@ -1,6 +1,6 @@
-package com.study.fcboard.controller.dto
+package com.study.fcboard.controller.dto.request
 
-import com.study.fcboard.service.dto.PostUpdateRequestDTO
+import com.study.fcboard.service.dto.request.PostUpdateRequestDTO
 
 data class PostUpdateRequest(
     val title: String,

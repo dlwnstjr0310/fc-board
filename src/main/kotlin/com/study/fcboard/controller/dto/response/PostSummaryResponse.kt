@@ -1,6 +1,6 @@
-package com.study.fcboard.controller.dto
+package com.study.fcboard.controller.dto.response
 
-import com.study.fcboard.service.dto.PostSummaryResponseDTO
+import com.study.fcboard.service.dto.response.PostSummaryResponseDTO
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 
@@ -11,7 +11,7 @@ data class PostSummaryResponse(
     val createdBy: String,
     val createdAt: String,
 
-)
+    )
 
 fun Page<PostSummaryResponseDTO>.toResponse() = PageImpl(
     this.content.map { it.toResponse() },

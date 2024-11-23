@@ -2,7 +2,7 @@ package com.study.fcboard.repository
 
 import com.study.fcboard.domain.Post
 import com.study.fcboard.domain.QPost.post
-import com.study.fcboard.service.dto.PostSearchRequestDTO
+import com.study.fcboard.service.dto.request.PostSearchRequestDTO
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable

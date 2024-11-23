@@ -1,6 +1,6 @@
-package com.study.fcboard.controller.dto
+package com.study.fcboard.controller.dto.response
 
-import com.study.fcboard.service.dto.PostDetailResponseDTO
+import com.study.fcboard.service.dto.response.PostDetailResponseDTO
 
 data class PostDetailResponse(
     val id: Long,
@@ -16,5 +16,6 @@ fun PostDetailResponseDTO.toResponse() = PostDetailResponse(
     title = this.title,
     content = this.content,
     createdBy = this.createdBy,
-    createdAt = this.createdAt
+    createdAt = this.createdAt,
+    comments = this.comments.map { it.toResponse() }
 )
