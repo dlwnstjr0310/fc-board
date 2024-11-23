@@ -13,5 +13,5 @@ fun Comment.toResponseDTO() = CommentResponseDTO(
     id = id,
     content = content,
     createdBy = createdBy,
-    createdAt = createdAt.toString(),
+    createdAt = createdAt.toString()
 )

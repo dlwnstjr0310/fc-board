@@ -203,7 +203,6 @@ class PostServiceTest(
                     postService.getPost(999L)
                 }
             }
-
         }
 
         When("댓글 추가 시") {
@@ -212,7 +211,7 @@ class PostServiceTest(
                 listOf(
                     Comment("댓글 내용1", saved, "댓글 작성자"),
                     Comment("댓글 내용2", saved, "댓글 작성자"),
-                    Comment("댓글 내용3", saved, "댓글 작성자"),
+                    Comment("댓글 내용3", saved, "댓글 작성자")
                 )
             )
 
@@ -227,9 +226,7 @@ class PostServiceTest(
                 post.comments[0].createdBy shouldBe "댓글 작성자"
                 post.comments[1].createdBy shouldBe "댓글 작성자"
                 post.comments[2].createdBy shouldBe "댓글 작성자"
-
             }
-
         }
     }
 

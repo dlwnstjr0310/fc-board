@@ -1,11 +1,11 @@
 package com.study.fcboard.controller
 
 import com.study.fcboard.controller.dto.request.PostCreateRequest
-import com.study.fcboard.controller.dto.response.PostDetailResponse
 import com.study.fcboard.controller.dto.request.PostSearchRequest
-import com.study.fcboard.controller.dto.response.PostSummaryResponse
 import com.study.fcboard.controller.dto.request.PostUpdateRequest
 import com.study.fcboard.controller.dto.request.toDTO
+import com.study.fcboard.controller.dto.response.PostDetailResponse
+import com.study.fcboard.controller.dto.response.PostSummaryResponse
 import com.study.fcboard.controller.dto.response.toResponse
 import com.study.fcboard.service.PostService
 import org.springframework.data.domain.Page

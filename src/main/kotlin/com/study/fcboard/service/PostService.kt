@@ -4,12 +4,12 @@ import com.study.fcboard.exception.PostNotDeletableException
 import com.study.fcboard.exception.PostNotFoundException
 import com.study.fcboard.repository.PostRepository
 import com.study.fcboard.service.dto.request.PostCreateRequestDTO
-import com.study.fcboard.service.dto.response.PostDetailResponseDTO
 import com.study.fcboard.service.dto.request.PostSearchRequestDTO
-import com.study.fcboard.service.dto.response.PostSummaryResponseDTO
 import com.study.fcboard.service.dto.request.PostUpdateRequestDTO
-import com.study.fcboard.service.dto.response.toDetailResponseDTO
 import com.study.fcboard.service.dto.request.toEntity
+import com.study.fcboard.service.dto.response.PostDetailResponseDTO
+import com.study.fcboard.service.dto.response.PostSummaryResponseDTO
+import com.study.fcboard.service.dto.response.toDetailResponseDTO
 import com.study.fcboard.service.dto.response.toSummaryResponseDTO
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

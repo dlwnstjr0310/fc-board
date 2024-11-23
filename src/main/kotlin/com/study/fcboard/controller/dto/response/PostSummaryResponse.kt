@@ -11,7 +11,7 @@ data class PostSummaryResponse(
     val createdBy: String,
     val createdAt: String,
 
-    )
+)
 
 fun Page<PostSummaryResponseDTO>.toResponse() = PageImpl(
     this.content.map { it.toResponse() },
