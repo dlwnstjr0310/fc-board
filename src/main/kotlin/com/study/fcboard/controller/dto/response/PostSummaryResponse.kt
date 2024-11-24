@@ -11,6 +11,7 @@ data class PostSummaryResponse(
     val createdBy: String,
     val createdAt: String,
     val tag: String? = null,
+    val likeCount: Long = 0,
 
     )
 

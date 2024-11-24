@@ -242,7 +242,7 @@ class PostServiceTest(
             Post(
                 "title",
                 "content",
-                "junstone",
+                "junstone"
             )
         )
 
@@ -250,7 +250,7 @@ class PostServiceTest(
             listOf(
                 Tag("tag1", saved, "junstone"),
                 Tag("tag2", saved, "junstone"),
-                Tag("tag3", saved, "junstone"),
+                Tag("tag3", saved, "junstone")
             )
         )
 
@@ -272,9 +272,7 @@ class PostServiceTest(
                 post.tags[0] shouldBe "tag1"
                 post.tags[1] shouldBe "tag2"
                 post.tags[2] shouldBe "tag3"
-
             }
-
         }
 
         When("게시글이 없을 때") {
@@ -378,7 +376,6 @@ class PostServiceTest(
                 postPage.content[3].title shouldBe "title9"
                 postPage.content[4].title shouldBe "title10"
             }
-
         }
     }
 })
