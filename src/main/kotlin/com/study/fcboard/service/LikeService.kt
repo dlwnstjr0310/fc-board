@@ -19,7 +19,6 @@ class LikeService(
 
     @Transactional
     fun createLike(postId: Long, createdBy: String): Long {
-
         redisUtil.increment(redisUtil.getLikeCountKey(postId))
 
         return likeRepository.save(
@@ -31,7 +30,6 @@ class LikeService(
     }
 
     fun countLike(postId: Long): Long {
-
         redisUtil.getCount(redisUtil.getLikeCountKey(postId))?.let {
             return it
         }
