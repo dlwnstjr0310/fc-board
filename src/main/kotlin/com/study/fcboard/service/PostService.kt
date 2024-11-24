@@ -3,6 +3,7 @@ package com.study.fcboard.service
 import com.study.fcboard.exception.PostNotDeletableException
 import com.study.fcboard.exception.PostNotFoundException
 import com.study.fcboard.repository.PostRepository
+import com.study.fcboard.repository.TagRepository
 import com.study.fcboard.service.dto.request.PostCreateRequestDTO
 import com.study.fcboard.service.dto.request.PostSearchRequestDTO
 import com.study.fcboard.service.dto.request.PostUpdateRequestDTO
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional
 class PostService(
     private val postRepository: PostRepository,
     private val likeService: LikeService,
+    private val tagRepository: TagRepository,
 ) {
 
     @Transactional
@@ -56,7 +58,12 @@ class PostService(
             ?: throw PostNotFoundException()
     }
 
-    fun findPageBy(pageRequest: Pageable, postSearchRequestDTO: PostSearchRequestDTO): Page<PostSummaryResponseDTO> =
-        postRepository.findPageBy(pageRequest, postSearchRequestDTO)
+    fun findPageBy(pageRequest: Pageable, postSearchRequestDTO: PostSearchRequestDTO): Page<PostSummaryResponseDTO> {
+        postSearchRequestDTO.tag?.let {
+            tagRepository.findPageBy(pageRequest, it).toSummaryResponseDTO(likeService::countLike)
+        }
+
+        return postRepository.findPageBy(pageRequest, postSearchRequestDTO)
             .toSummaryResponseDTO(likeService::countLike)
+    }
 }
