@@ -9,6 +9,7 @@ data class PostDetailResponseDTO(
     val createdBy: String,
     val createdAt: String,
     val comments: List<CommentResponseDTO>,
+    val tags: List<String> = emptyList(),
 )
 
 fun Post.toDetailResponseDTO() = PostDetailResponseDTO(
@@ -17,5 +18,6 @@ fun Post.toDetailResponseDTO() = PostDetailResponseDTO(
     content = content,
     createdBy = createdBy,
     createdAt = createdAt.toString(),
-    comments = comments.map { it.toResponseDTO() }
+    comments = comments.map { it.toResponseDTO() },
+    tags = tags.map { it.name }
 )

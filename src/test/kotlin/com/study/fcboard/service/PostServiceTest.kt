@@ -2,6 +2,7 @@ package com.study.fcboard.service
 
 import com.study.fcboard.domain.Comment
 import com.study.fcboard.domain.Post
+import com.study.fcboard.domain.Tag
 import com.study.fcboard.exception.PostNotDeletableException
 import com.study.fcboard.exception.PostNotFoundException
 import com.study.fcboard.exception.PostNotUpdatableException
@@ -32,16 +33,16 @@ class PostServiceTest(
     beforeSpec {
         postRepository.saveAll(
             listOf(
-                Post("title1", "content1", "junstone1"),
-                Post("title12", "content1", "junstone1"),
-                Post("title13", "content1", "junstone1"),
-                Post("title14", "content1", "junstone1"),
-                Post("title15", "content1", "junstone1"),
-                Post("title6", "content1", "junstone2"),
-                Post("title7", "content1", "junstone2"),
-                Post("title8", "content1", "junstone2"),
-                Post("title9", "content1", "junstone2"),
-                Post("title10", "content1", "junstone2")
+                Post("title1", "content1", "junstone1", tags = listOf("tag1", "tag2")),
+                Post("title12", "content1", "junstone1", tags = listOf("tag1", "tag2")),
+                Post("title13", "content1", "junstone1", tags = listOf("tag1", "tag2")),
+                Post("title14", "content1", "junstone1", tags = listOf("tag1", "tag2")),
+                Post("title15", "content1", "junstone1", tags = listOf("tag1", "tag2")),
+                Post("title6", "content1", "junstone2", tags = listOf("tag1", "tag5")),
+                Post("title7", "content1", "junstone2", tags = listOf("tag1", "tag5")),
+                Post("title8", "content1", "junstone2", tags = listOf("tag1", "tag5")),
+                Post("title9", "content1", "junstone2", tags = listOf("tag1", "tag5")),
+                Post("title10", "content1", "junstone2", tags = listOf("tag1", "tag5"))
             )
         )
     }
@@ -241,7 +242,15 @@ class PostServiceTest(
             Post(
                 "title",
                 "content",
-                "junstone"
+                "junstone",
+            )
+        )
+
+        tagRepository.saveAll(
+            listOf(
+                Tag("tag1", saved, "junstone"),
+                Tag("tag2", saved, "junstone"),
+                Tag("tag3", saved, "junstone"),
             )
         )
 
@@ -256,6 +265,16 @@ class PostServiceTest(
                 post.content shouldBe "content"
                 post.createdBy shouldBe "junstone"
             }
+
+            then("태그가 정상적으로 조회됨을 확인한다.") {
+
+                post.tags.size shouldBe 3
+                post.tags[0] shouldBe "tag1"
+                post.tags[1] shouldBe "tag2"
+                post.tags[2] shouldBe "tag3"
+
+            }
+
         }
 
         When("게시글이 없을 때") {
@@ -335,6 +354,31 @@ class PostServiceTest(
                 postPage.content[0].title shouldContain "title"
                 postPage.content[0].createdBy shouldBe "junstone1"
             }
+
+            then("첫번째 태그가 함께 조회됨을 확인한다.") {
+
+                postPage.content.forEach {
+                    it.firstTag shouldBe "tag1"
+                }
+            }
+        }
+
+        When("태그로 검색") {
+
+            val postPage = postService.findPageBy(PageRequest.of(0, 5), PostSearchRequestDTO(tag = "tag5"))
+
+            then("태그에 해당하는 게시글이 반환된다.") {
+
+                postPage.number shouldBe 0
+                postPage.size shouldBe 5
+                postPage.content.size shouldBe 5
+                postPage.content[0].title shouldBe "title6"
+                postPage.content[1].title shouldBe "title7"
+                postPage.content[2].title shouldBe "title8"
+                postPage.content[3].title shouldBe "title9"
+                postPage.content[4].title shouldBe "title10"
+            }
+
         }
     }
 })
