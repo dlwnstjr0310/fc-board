@@ -13,7 +13,7 @@ data class PostSummaryResponse(
     val tag: String? = null,
     val likeCount: Long = 0,
 
-    )
+)
 
 fun Page<PostSummaryResponseDTO>.toResponse() = PageImpl(
     this.content.map { it.toResponse() },
