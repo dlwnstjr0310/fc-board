@@ -1,11 +1,10 @@
 package com.study.fcboard.service
 
-import com.study.fcboard.domain.Like
-import com.study.fcboard.exception.PostNotFoundException
+import com.study.fcboard.event.dto.LikeEvent
 import com.study.fcboard.repository.LikeRepository
 import com.study.fcboard.repository.PostRepository
 import com.study.fcboard.util.RedisUtil
-import org.springframework.data.repository.findByIdOrNull
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -15,18 +14,11 @@ class LikeService(
     private val likeRepository: LikeRepository,
     private val postRepository: PostRepository,
     private val redisUtil: RedisUtil,
+    private val applicationEventPublisher: ApplicationEventPublisher,
 ) {
 
-    @Transactional
-    fun createLike(postId: Long, createdBy: String): Long {
-        redisUtil.increment(redisUtil.getLikeCountKey(postId))
-
-        return likeRepository.save(
-            Like(
-                postRepository.findByIdOrNull(postId) ?: throw PostNotFoundException(),
-                createdBy
-            )
-        ).id
+    fun createLike(postId: Long, createdBy: String) {
+        applicationEventPublisher.publishEvent(LikeEvent(postId, createdBy))
     }
 
     fun countLike(postId: Long): Long {
